@@ -5,8 +5,11 @@ Laravel 13 full-stack project and Kanban board for **Seksi Aplikasi, Siber dan S
 ## Application
 
 - Department portfolio of multiple projects.
+- Portfolio filters for status, priority, owner, search, and overdue projects; progress is calculated from completed tasks.
+- Leaders and owners can update project details, ownership, status, priority, and due date.
 - Project boards with To do, In progress, Blocked and Done columns.
 - Create, edit and delete tasks, including their description, owner, priority, due date and status.
+- Recent project activity for project changes and task creation, editing, status changes, and deletion.
 - Account login and registration controlled by a private invitation code.
 - PostgreSQL support for shared hosting; SQLite for local development.
 - Department membership checks on project and task requests. Project creation is limited to leaders/owners; deleting another member's task is limited to leaders/owners.
@@ -37,4 +40,4 @@ This repo includes a Dockerfile and a Render Blueprint. See [DEPLOYMENT.md](DEPL
 
 ## Pilot limits
 
-Registration uses one shared invitation code; there is not yet an invitation manager, email verification, password recovery, audit history, or backup workflow. Review account access and restore procedures before using official project data.
+Registration uses one shared invitation code; there is not yet an invitation manager, email verification, password recovery, a complete audit trail, or backup workflow. The activity feed is for recent team updates, not a records-retention audit system. Review account access and restore procedures before using official project data.
