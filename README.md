@@ -1,23 +1,40 @@
 # RuangKerja
 
-Prototype Kanban multi-proyek untuk Departemen IT Development, dengan pelaporan pada **Seksi Aplikasi, Siber dan Statistik**.
+Laravel 13 full-stack project and Kanban board for **Seksi Aplikasi, Siber dan Statistik**.
 
-## Jalankan
+## Application
 
-Buka `index.html` dengan Chrome, Edge, atau peramban modern lainnya. Tidak perlu instalasi atau koneksi internet. Data proyek yang Anda tambahkan disimpan di penyimpanan lokal peramban pada komputer ini. Gunakan **Unduh laporan** untuk mengekspor ringkasan CSV.
+- Department portfolio of multiple projects.
+- Project boards with To do, In progress, Blocked and Done columns.
+- Create, edit and delete tasks, including their description, owner, priority, due date and status.
+- Account login and registration controlled by a private invitation code.
+- PostgreSQL support for shared hosting; SQLite for local development.
+- Department membership checks on project and task requests. Project creation is limited to leaders/owners; deleting another member's task is limited to leaders/owners.
 
-## Fitur prototipe
+The Laravel application is at the repository root. The root `index.html` is the earlier static prototype, kept for GitHub Pages preview compatibility; it saves data in each browser and does not use the Laravel backend.
 
-- Ringkasan portofolio departemen dan kesehatan proyek.
-- Daftar proyek dengan pencarian, filter status, kemajuan, pemilik, dan tenggat.
-- Papan Kanban lintas proyek; tugas dapat ditambah, dipindah antarstatus, atau diseret ke kolom lain.
-- Laporan proyek yang dapat diekspor ke CSV.
-- Data contoh disediakan untuk menampilkan pengalaman awal.
+## Run locally
 
-## Batasan
+Requirements: PHP 8.3+, Composer, and SQLite. Required PHP extensions include `pdo_sqlite`, `openssl`, `mbstring`, `fileinfo`, and `curl`.
 
-Ini adalah prototipe lokal untuk validasi alur kerja. Penyimpanan lokal tidak membagikan perubahan ke anggota tim lain. Belum tersedia akun/otorisasi, basis data bersama, riwayat audit, pencadangan, atau penyiapan produksi. Data contoh pada tampilan tidak mewakili pelaporan resmi.
+```powershell
+Copy-Item .env.example .env
+php artisan key:generate
+```
 
-## Saran tim untuk tahap berikutnya
+Set a strong private `REGISTRATION_CODE` in `.env`, then run:
 
-Untuk prototipe kecil, gunakan tim ringkas: koordinator produk GPT-6 Luna (medium), implementasi antarmuka GPT-5.6 Terra (high), serta satu peninjau backend dan QA GPT-5.6 Terra (medium). Pisahkan backend dan QA menjadi dua peran setelah ruang lingkup bertambah; review aksesibilitas dapat memakai GPT-5.6 Luna (medium). Model adalah usulan pembagian kerja, bukan bagian runtime aplikasi.
+```powershell
+php artisan migrate
+php artisan serve
+```
+
+Open `http://127.0.0.1:8000/register` and create the first account. The first account becomes department owner; subsequent accounts join as members. Keep `.env` private and never commit it. Remove the registration code to close registration after initial onboarding.
+
+## Deploy
+
+This repo includes a Dockerfile and a Render Blueprint. See [DEPLOYMENT.md](DEPLOYMENT.md) for the hosted database and environment setup. GitHub Pages serves only the static prototype; use a PHP host to run Laravel.
+
+## Pilot limits
+
+Registration uses one shared invitation code; there is not yet an invitation manager, email verification, password recovery, audit history, or backup workflow. Review account access and restore procedures before using official project data.
